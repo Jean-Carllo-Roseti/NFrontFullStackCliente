@@ -1,15 +1,20 @@
 import React from 'react'
-import './App.css'
+import { GlobalCss } from './styles'
+
 import Header from './components/Header'
 import TabelaConsulta from './components/TabelaConsulta'
+import FormCadastro from './components/FormCadastro'
 
 function App() {
   return (
-    <div>
-      <Header />
-
-      <TabelaConsulta />
-    </div>
+    <>
+      <GlobalCss />
+      <div>
+        <Header />
+        <FormCadastro />
+        <TabelaConsulta />
+      </div>
+    </>
   )
 }
 

@@ -1,9 +1,10 @@
 import React from 'react'
+import { ContentButton, ContentForm } from './style'
 
 const FormCadastro = () => (
-  <div>
+  <ContentForm>
     <form action="">
-      <label htmlFor="nome">Nome:</label>
+      <label htmlFor="nome">Nome</label>
       <input id="nome" type="text" placeholder="Nome" />
       <label htmlFor="sobreNome">Sobre Nome</label>
       <input id="sobreNome" type="email" placeholder="Sobre Nome" />
@@ -18,7 +19,11 @@ const FormCadastro = () => (
       <label htmlFor="estado">Estado</label>
       <input id="estado" type="text" placeholder="Estado" />
     </form>
-  </div>
+    <ContentButton>
+      <button>Salvar</button>
+      <button>Limpar</button>
+    </ContentButton>
+  </ContentForm>
 )
 
 export default FormCadastro

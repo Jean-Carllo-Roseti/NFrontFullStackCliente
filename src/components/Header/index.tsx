@@ -1,9 +1,10 @@
 import React from 'react'
+import { HeaderBar } from './style'
 
 const Header = () => (
-  <header>
-    <h1>Cabeçalho</h1>
-  </header>
+  <HeaderBar>
+    <h1>Cadastro de Clientes</h1>
+  </HeaderBar>
 )
 
 export default Header
