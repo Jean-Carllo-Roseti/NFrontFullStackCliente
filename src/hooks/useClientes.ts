@@ -1,4 +1,3 @@
-// src/hooks/useClientes.ts
 import { useState, useEffect } from 'react'
 import {
   getClientes,
@@ -6,7 +5,7 @@ import {
   updateCliente,
   deleteCliente
 } from '../services/clienteService'
-import { Cliente } from '../types' // Defina o tipo 'Cliente'
+import { Cliente } from '../types'
 
 const useClientes = () => {
   const [clientes, setClientes] = useState<Cliente[]>([])
@@ -19,8 +18,8 @@ const useClientes = () => {
         const data = await getClientes()
         setClientes(data)
       } catch (err) {
-        console.error('1Erro ao adicionar cliente:', err) // Log do erro para depuração
-        setError('1Erro ao adicionar cliente')
+        console.error('Erro de requermiento de  clientes:', err)
+        setError('Erro de requermiento de  clientes')
       } finally {
         setLoading(false)
       }
@@ -34,8 +33,8 @@ const useClientes = () => {
       const novoCliente = await createCliente(cliente)
       setClientes([...clientes, novoCliente])
     } catch (err) {
-      console.error('2Erro ao adicionar cliente:', err) // Log do erro para depuração
-      setError('2Erro ao adicionar cliente')
+      console.error('Erro ao criar cliente:', err)
+      setError('Erro ao criar cliente')
     }
   }
 
@@ -44,8 +43,8 @@ const useClientes = () => {
       const clienteAtualizado = await updateCliente(id, cliente)
       setClientes(clientes.map((c) => (c.id === id ? clienteAtualizado : c)))
     } catch (err) {
-      console.error('3Erro ao adicionar cliente:', err) // Log do erro para depuração
-      setError('3Erro ao adicionar cliente')
+      console.error('Erro ao editar o cliente:', err)
+      setError('Erro ao editar o cliente')
     }
   }
 
@@ -54,8 +53,8 @@ const useClientes = () => {
       await deleteCliente(id)
       setClientes(clientes.filter((cliente) => cliente.id !== id))
     } catch (err) {
-      console.error('4Erro ao adicionar cliente:', err) // Log do erro para depuração
-      setError('4Erro ao adicionar cliente')
+      console.error('Erro ao deletar cliente:', err)
+      setError('Erro ao deletar cliente')
     }
   }
 
