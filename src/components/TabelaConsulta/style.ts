@@ -38,4 +38,8 @@ export const ContentTabela = styled.div`
   tr:hover {
     background-color: #f1f1f1;
   }
+
+  button {
+    margin: 0 4px 0 0;
+  }
 `
