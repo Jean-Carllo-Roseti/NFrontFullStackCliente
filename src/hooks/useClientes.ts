@@ -19,7 +19,8 @@ const useClientes = () => {
         const data = await getClientes()
         setClientes(data)
       } catch (err) {
-        setError('Erro ao carregar clientes')
+        console.error('1Erro ao adicionar cliente:', err) // Log do erro para depuração
+        setError('1Erro ao adicionar cliente')
       } finally {
         setLoading(false)
       }
@@ -33,7 +34,8 @@ const useClientes = () => {
       const novoCliente = await createCliente(cliente)
       setClientes([...clientes, novoCliente])
     } catch (err) {
-      setError('Erro ao adicionar cliente')
+      console.error('2Erro ao adicionar cliente:', err) // Log do erro para depuração
+      setError('2Erro ao adicionar cliente')
     }
   }
 
@@ -42,7 +44,8 @@ const useClientes = () => {
       const clienteAtualizado = await updateCliente(id, cliente)
       setClientes(clientes.map((c) => (c.id === id ? clienteAtualizado : c)))
     } catch (err) {
-      setError('Erro ao atualizar cliente')
+      console.error('3Erro ao adicionar cliente:', err) // Log do erro para depuração
+      setError('3Erro ao adicionar cliente')
     }
   }
 
@@ -51,7 +54,8 @@ const useClientes = () => {
       await deleteCliente(id)
       setClientes(clientes.filter((cliente) => cliente.id !== id))
     } catch (err) {
-      setError('Erro ao remover cliente')
+      console.error('4Erro ao adicionar cliente:', err) // Log do erro para depuração
+      setError('4Erro ao adicionar cliente')
     }
   }
 
