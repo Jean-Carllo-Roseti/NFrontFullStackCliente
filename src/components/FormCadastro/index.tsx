@@ -10,8 +10,8 @@ const FormCadastro = () => {
     id: 0,
     nome: '',
     sobreNome: '',
-    email: '',
     idade: 0,
+    email: '',
     endereco: '',
     cidade: '',
     estado: ''
@@ -25,10 +25,22 @@ const FormCadastro = () => {
     }))
   }
 
-  // Função chamada quando o formulário é enviado
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // Log dos dados do cliente antes de salvar
+    console.log('Cliente antes de salvar:', cliente)
+
+    // Chame a função para adicionar o cliente
     addCliente(cliente)
+
+    // Verifique se o estado foi atualizado
+    console.log('Cliente enviado para a função addCliente:', cliente)
+
+    // Verifique se o estado foi realmente alterado (opcional)
+    setTimeout(() => {
+      console.log('Estado do cliente após 100ms:', cliente)
+    }, 100) // O setTimeout simula um tempo para verificar o estado após um curto intervalo
   }
 
   return (
@@ -41,14 +53,16 @@ const FormCadastro = () => {
           placeholder="Nome"
           value={cliente.nome}
           onChange={onChange}
+          required
         />
         <label htmlFor="sobreNome">Sobre Nome</label>
         <input
           id="sobreNome"
-          type="email"
+          type="text"
           placeholder="Sobre Nome"
           value={cliente.sobreNome}
           onChange={onChange}
+          required
         />
         <label htmlFor="email"> E-mail</label>
         <input
@@ -57,6 +71,7 @@ const FormCadastro = () => {
           placeholder="E-mail"
           value={cliente.email}
           onChange={onChange}
+          required
         />
         <label htmlFor="idade">Idade</label>
         <input
@@ -65,6 +80,7 @@ const FormCadastro = () => {
           placeholder="Idade"
           value={cliente.idade}
           onChange={onChange}
+          required
         />
         <label htmlFor="endereco">Endereço</label>
         <input
@@ -73,6 +89,7 @@ const FormCadastro = () => {
           placeholder="Endereço"
           value={cliente.endereco}
           onChange={onChange}
+          required
         />
         <label htmlFor="cidade">Cidade</label>
         <input
@@ -81,6 +98,7 @@ const FormCadastro = () => {
           placeholder="Cidade"
           value={cliente.cidade}
           onChange={onChange}
+          required
         />
         <label htmlFor="estado">Estado</label>
         <input
@@ -89,28 +107,29 @@ const FormCadastro = () => {
           placeholder="Estado"
           value={cliente.estado}
           onChange={onChange}
+          required
         />
+        <ContentButton>
+          <button type="submit">Salvar</button>
+          <button
+            type="button"
+            onClick={() =>
+              setCliente({
+                id: 0,
+                nome: '',
+                sobreNome: '',
+                email: '',
+                idade: 0,
+                endereco: '',
+                cidade: '',
+                estado: ''
+              })
+            }
+          >
+            Limpar
+          </button>
+        </ContentButton>
       </form>
-      <ContentButton>
-        <button type="submit">Salvar</button>
-        <button
-          type="button"
-          onClick={() =>
-            setCliente({
-              id: 0,
-              nome: '',
-              sobreNome: '',
-              email: '',
-              idade: 0,
-              endereco: '',
-              cidade: '',
-              estado: ''
-            })
-          }
-        >
-          Limpar
-        </button>
-      </ContentButton>
     </ContentForm>
   )
 }
