@@ -19,6 +19,8 @@ const FormCadastro = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
+
+    setCliente({ ...cliente, [e.target.name]: e.target.value })
     setCliente((prevCliente) => ({
       ...prevCliente,
       [id]: id === 'idade' ? Number(value) : value // Converta a idade para número
@@ -28,19 +30,8 @@ const FormCadastro = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Log dos dados do cliente antes de salvar
-    console.log('Cliente antes de salvar:', cliente)
-
     // Chame a função para adicionar o cliente
     addCliente(cliente)
-
-    // Verifique se o estado foi atualizado
-    console.log('Cliente enviado para a função addCliente:', cliente)
-
-    // Verifique se o estado foi realmente alterado (opcional)
-    setTimeout(() => {
-      console.log('Estado do cliente após 100ms:', cliente)
-    }, 100) // O setTimeout simula um tempo para verificar o estado após um curto intervalo
   }
 
   return (
