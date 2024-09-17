@@ -4,7 +4,6 @@ import { ContentForm, ContentButton } from '../FormCadastro/style'
 
 const EditForm: React.FC<{
   cliente: Cliente
-
   onSave: (cliente: Cliente) => void
   onCancel: () => void
 }> = ({ cliente, onSave, onCancel }) => {

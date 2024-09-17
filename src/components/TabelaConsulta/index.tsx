@@ -4,7 +4,12 @@ import useClientes from '../../hooks/useClientes'
 import EditForm from '../EditForm'
 import { Cliente } from '../../types'
 
-const TabelaConsulta: React.FC<{ onBack: () => void }> = ({ onBack }) => {
+interface TabelaConsultaProps {
+  onBack: () => void
+  onEdit?: React.Dispatch<React.SetStateAction<Cliente | null>>
+}
+
+const TabelaConsulta: React.FC<TabelaConsultaProps> = ({ onBack }) => {
   const { clientes, loading, error, removeCliente, editCliente } = useClientes()
   const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
 
@@ -39,14 +44,14 @@ const TabelaConsulta: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         <table>
           <thead>
             <tr>
-              <th>id</th>
-              <th>nome</th>
-              <th>sobre Nome</th>
-              <th>idade</th>
-              <th>email</th>
-              <th>endereço</th>
-              <th>cidade</th>
-              <th>estado</th>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Sobre Nome</th>
+              <th>Idade</th>
+              <th>E-mail</th>
+              <th>Endereço</th>
+              <th>Cidade</th>
+              <th>Estado</th>
               <th> </th>
             </tr>
           </thead>

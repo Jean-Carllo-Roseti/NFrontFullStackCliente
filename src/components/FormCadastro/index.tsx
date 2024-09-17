@@ -3,20 +3,12 @@ import { ContentButton, ContentForm } from './style'
 import useClientes from '../../hooks/useClientes'
 import { Cliente } from '../../types'
 import TabelaConsulta from '../TabelaConsulta'
-// import Header from '../Header'
+import EditForm from '../EditForm'
 
 const FormCadastro = () => {
   const { addCliente } = useClientes()
   const [exibirTabela, setExibirTabela] = useState(false)
-
-  const handleToggeTabela = () => {
-    setExibirTabela(!exibirTabela)
-  }
-
-  const handleBack = () => {
-    setExibirTabela(false)
-  }
-
+  const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
   const [cliente, setCliente] = useState<Cliente>({
     id: 0,
     nome: '',
@@ -28,6 +20,29 @@ const FormCadastro = () => {
     estado: ''
   })
 
+  const handleToggeTabela = () => {
+    setExibirTabela(!exibirTabela)
+  }
+
+  const handleBack = () => {
+    setExibirTabela(false)
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    addCliente(cliente)
+    setCliente({
+      id: 0,
+      nome: '',
+      sobreNome: '',
+      idade: 0,
+      email: '',
+      endereco: '',
+      cidade: '',
+      estado: ''
+    })
+  }
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
 
@@ -38,21 +53,29 @@ const FormCadastro = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSave = (updatedCliente: Cliente) => {
+    addCliente(updatedCliente) // Assuming addCliente also handles updates
+    setEditandoCliente(null)
+  }
 
-    // Chame a função para adicionar o cliente
-    addCliente(cliente)
+  const handleCancel = () => {
+    setEditandoCliente(null)
   }
 
   return (
     <>
-      <header>
-        <h1>Dados Pessoais</h1>
-      </header>
       <ContentForm>
+        <header>
+          <h1>Dados Pessoais</h1>
+        </header>
         {exibirTabela ? (
-          <TabelaConsulta onBack={handleBack} />
+          <TabelaConsulta onBack={handleBack} onEdit={setEditandoCliente} />
+        ) : editandoCliente ? (
+          <EditForm
+            cliente={editandoCliente}
+            onSave={handleSave}
+            onCancel={handleCancel}
+          />
         ) : (
           <form onSubmit={handleSubmit}>
             <label htmlFor="nome">Nome</label>
@@ -137,10 +160,10 @@ const FormCadastro = () => {
               >
                 Limpar
               </button>
-              <button type="button" onClick={handleToggeTabela}>
-                Exibir Tabela
-              </button>
             </ContentButton>
+            <button type="button" onClick={handleToggeTabela}>
+              Exibir Tabela
+            </button>
           </form>
         )}
       </ContentForm>

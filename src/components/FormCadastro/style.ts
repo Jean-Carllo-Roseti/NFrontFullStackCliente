@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 
 export const ContentForm = styled.div`
-  max-width: 40%;
   margin: 0 auto;
 
+  h1 {
+    text-align: center;
+  }
+
   form {
+    margin: 0 auto;
+    width: 40%;
     display: flex;
     flex-direction: column;
   }
