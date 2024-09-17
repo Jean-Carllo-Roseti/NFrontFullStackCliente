@@ -1,30 +1,21 @@
 import styled from 'styled-components'
-
-// export const ContentTabela = styled.div`
-//   margin: 0 auto;
-//   background-color: #ddd;
-//   margin-top: 18px;
-
-//   table {
-//     width: 100%;
-
-//   }
-// `
+import { Botoes } from '../FormCadastro/style'
 
 export const ContentTabela = styled.div`
   margin: 20px;
-  // overflow-x: auto; /* Permite rolar horizontalmente se necessário */
+  overflow-x: auto;
+  background-color: #9e9e9ead;
 
   table {
     width: 100%;
-    border-collapse: collapse; /* Remove espaços entre as células */
+    border-collapse: collapse;
   }
 
   th,
   td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center; /* Centraliza o texto horizontalmente */
+    text-align: center;
   }
 
   th {
@@ -36,10 +27,20 @@ export const ContentTabela = styled.div`
   }
 
   tr:hover {
-    background-color: #f1f1f1;
+    border: 2px solid #000;
   }
+`
+export const TableButton = styled.button`
+  padding: 2px;
+  margin: 0 4px 0 0;
+  cursor: pointer;
+  background-color: red;
+`
+export const BotoesAjuste = styled(Botoes)`
+  margin-left: 20px;
+  width: 20%;
 
-  button {
-    margin: 0 4px 0 0;
+  &: hover {
+    background-color: #e74c3c;
   }
 `

@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const HeaderBar = styled.header`
-  background-color: #000;
+  background-color: #e74c3c;
   color: #fff;
   display: flex;
   justify-content: center;
-  padding: 8px;
+  padding: 18px;
   margin-bottom: 16px;
 `

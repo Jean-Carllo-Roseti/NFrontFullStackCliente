@@ -7,8 +7,8 @@ export const GlobalCss = createGlobalStyle`
   box-sizing: border-box;
 }
   body {
-    max-width: 1024px;
     width: 100%;
     margin: 0 auto;
+    background-color: #b1f0c1;
   }
 `

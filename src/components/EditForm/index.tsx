@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Cliente } from '../../types/index'
 import { ContentForm, ContentButton } from '../FormCadastro/style'
+import { Botoes } from '../FormCadastro/style'
 
 const EditForm: React.FC<{
   cliente: Cliente
@@ -23,7 +24,7 @@ const EditForm: React.FC<{
   }
 
   return (
-    <ContentForm>
+    <ContentForm style={{ paddingBottom: '18px' }}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="nome">Nome</label>
         <input
@@ -75,10 +76,10 @@ const EditForm: React.FC<{
           onChange={onChange}
         />
         <ContentButton>
-          <button type="submit">Salvar</button>
-          <button type="button" onClick={onCancel}>
+          <Botoes type="submit">Salvar</Botoes>
+          <Botoes type="button" onClick={onCancel}>
             Cancelar
-          </button>
+          </Botoes>
         </ContentButton>
       </form>
     </ContentForm>
