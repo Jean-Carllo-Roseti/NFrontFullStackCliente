@@ -4,7 +4,7 @@ import useClientes from '../../hooks/useClientes'
 import EditForm from '../EditForm'
 import { Cliente } from '../../types'
 
-const TabelaConsulta: React.FC = () => {
+const TabelaConsulta: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const { clientes, loading, error, removeCliente, editCliente } = useClientes()
   const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
 
@@ -26,56 +26,60 @@ const TabelaConsulta: React.FC = () => {
 
   return (
     <ContentTabela>
-      {editandoCliente && (
+      <button onClick={onBack} title="fechar tabela">
+        tela de cadastro
+      </button>
+      {editandoCliente ? (
         <EditForm
           cliente={editandoCliente}
           onSave={handleSave}
           onCancel={handleCancel}
         />
-      )}
-      <table>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>nome</th>
-            <th>sobre Nome</th>
-            <th>idade</th>
-            <th>email</th>
-            <th>endereço</th>
-            <th>cidade</th>
-            <th>estado</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          {clientes.map((cliente) => (
-            <tr key={cliente.id}>
-              <td>{cliente.id}</td>
-              <td>{cliente.nome}</td>
-              <td>{cliente.sobreNome}</td>
-              <td>{cliente.idade}</td>
-              <td>{cliente.email}</td>
-              <td>{cliente.endereco}</td>
-              <td>{cliente.cidade}</td>
-              <td>{cliente.estado}</td>
-              <td>
-                <button
-                  onClick={() => removeCliente(cliente.id)}
-                  title="remover cadastro"
-                >
-                  X
-                </button>
-                <button
-                  onClick={() => handleEdit(cliente)}
-                  title="alterar cadastro"
-                >
-                  E
-                </button>
-              </td>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>nome</th>
+              <th>sobre Nome</th>
+              <th>idade</th>
+              <th>email</th>
+              <th>endereço</th>
+              <th>cidade</th>
+              <th>estado</th>
+              <th> </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {clientes.map((cliente) => (
+              <tr key={cliente.id}>
+                <td>{cliente.id}</td>
+                <td>{cliente.nome}</td>
+                <td>{cliente.sobreNome}</td>
+                <td>{cliente.idade}</td>
+                <td>{cliente.email}</td>
+                <td>{cliente.endereco}</td>
+                <td>{cliente.cidade}</td>
+                <td>{cliente.estado}</td>
+                <td>
+                  <button
+                    onClick={() => removeCliente(cliente.id)}
+                    title="remover cadastro"
+                  >
+                    X
+                  </button>
+                  <button
+                    onClick={() => handleEdit(cliente)}
+                    title="alterar cadastro"
+                  >
+                    E
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </ContentTabela>
   )
 }
