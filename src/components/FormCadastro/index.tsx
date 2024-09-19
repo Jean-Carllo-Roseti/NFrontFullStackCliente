@@ -65,7 +65,7 @@ const FormCadastro = () => {
   return (
     <ContentForm>
       <header>
-        <h1>Dados Pessoais</h1>
+        <h2>Dados Pessoais</h2>
       </header>
       {exibirTabela ? (
         <TabelaConsulta onBack={handleBack} onEdit={setEditandoCliente} />

@@ -6,7 +6,7 @@ export const ContentForm = styled.div`
   width: 100%;
   margin-top: 60px;
 
-  h1 {
+  h2 {
     text-align: center;
     margin-bottom: 18px;
     color: #2c3e50;
