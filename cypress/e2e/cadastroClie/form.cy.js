@@ -44,14 +44,52 @@ describe('Teste  Formulário', () => {
   })
 
   it('Test button salvar', () => {
+    cy.get('#nome').type('Luffy')
+    cy.get('#sobreNome').type('Monkey')
+    cy.get('#email').type('GoMary@gmail.com')
+    // eslint-disable-next-line cypress/unsafe-to-chain-command
+    cy.get('#idade').clear().type('16')
+    cy.get('#endereco').type('West Blue')
+    cy.get('#cidade').type('Praia')
+    cy.get('#estado').type('Red Line')
     cy.get('[type="submit"]').click()
+
+    cy.get('#msgSucesso').should(
+      'contain.text',
+      'Cliente cadastrado com sucesso!'
+    )
 
     cy.get('#nome').should('have.value', '')
     cy.get('#sobreNome').should('have.value', '')
     cy.get('#email').should('have.value', '')
-    cy.get('#idade').should('have.value', '')
+    cy.get('#idade').should('have.value', 0)
     cy.get('#endereco').should('have.value', '')
     cy.get('#cidade').should('have.value', '')
     cy.get('#estado').should('have.value', '')
+  })
+
+  it('Teste button limpar', () => {
+    cy.get('#nome').type('Luffy')
+    cy.get('#sobreNome').type('Monkey')
+    cy.get('#email').type('GoMary@gmail.com')
+    // eslint-disable-next-line cypress/unsafe-to-chain-command
+    cy.get('#idade').clear().type('16')
+    cy.get('#endereco').type('West Blue')
+    cy.get('#cidade').type('Praia')
+    cy.get('#estado').type('Red Line')
+
+    cy.get('.sc-egkSDF > [type="button"]').click()
+
+    cy.get('#nome').should('have.value', '')
+    cy.get('#sobreNome').should('have.value', '')
+    cy.get('#email').should('have.value', '')
+    cy.get('#idade').should('have.value', 0)
+    cy.get('#endereco').should('have.value', '')
+    cy.get('#cidade').should('have.value', '')
+    cy.get('#estado').should('have.value', '')
+  })
+
+  it('Teste button exibir tabela', () => {
+    cy.get('.sc-dntaoT').contains('Exibir Tabela').click()
   })
 })
