@@ -81,7 +81,11 @@ const FormCadastro = () => {
       <header>
         <h2>Dados Pessoais</h2>
       </header>
-      {mensagem && <p style={{ color: 'green' }}>{mensagem}</p>}
+      {mensagem && (
+        <p id="msgSucesso" style={{ color: 'green' }}>
+          {mensagem}
+        </p>
+      )}
       {exibirTabela ? (
         <TabelaConsulta onBack={handleBack} onEdit={setEditandoCliente} />
       ) : editandoCliente ? (
