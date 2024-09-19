@@ -46,11 +46,20 @@ const FormCadastro = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
 
-    setCliente({ ...cliente, [e.target.name]: e.target.value })
-    setCliente((prevCliente) => ({
-      ...prevCliente,
-      [id]: id === 'idade' ? Number(value) : value // Converta a idade para número
-    }))
+    // Se for o campo de idade, aplique a regex para permitir apenas números
+    if (id === 'idade') {
+      const onlyNumbers = value.replace(/[^0-9]/g, '') // Permite apenas números
+      setCliente((prevCliente) => ({
+        ...prevCliente,
+        [id]: onlyNumbers ? Number(onlyNumbers) : 0 // Armazena a idade apenas com números
+      }))
+    } else {
+      // Para os outros campos, basta atualizar o estado normalmente
+      setCliente((prevCliente) => ({
+        ...prevCliente,
+        [id]: value
+      }))
+    }
   }
 
   const handleSave = (updatedCliente: Cliente) => {
@@ -107,7 +116,7 @@ const FormCadastro = () => {
           <label htmlFor="idade">Idade</label>
           <input
             id="idade"
-            type="number"
+            type="text"
             placeholder="Idade"
             value={cliente.idade}
             onChange={onChange}
