@@ -8,6 +8,7 @@ import EditForm from '../EditForm'
 const FormCadastro = () => {
   const { addCliente } = useClientes()
   const [exibirTabela, setExibirTabela] = useState(false)
+  const [mensagem, setMensagem] = useState<string | null>(null)
   const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
   const [cliente, setCliente] = useState<Cliente>({
     id: 0,
@@ -41,6 +42,10 @@ const FormCadastro = () => {
       cidade: '',
       estado: ''
     })
+
+    setMensagem('Cliente cadastrado com sucesso!')
+
+    setTimeout(() => setMensagem(null), 3000)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +81,7 @@ const FormCadastro = () => {
       <header>
         <h2>Dados Pessoais</h2>
       </header>
+      {mensagem && <p style={{ color: 'green' }}>{mensagem}</p>}
       {exibirTabela ? (
         <TabelaConsulta onBack={handleBack} onEdit={setEditandoCliente} />
       ) : editandoCliente ? (
