@@ -34,7 +34,7 @@ const TabelaConsulta: React.FC<TabelaConsultaProps> = ({ onBack }) => {
   return (
     <>
       <BotoesAjuste onClick={onBack} title="fechar tabela">
-        tela de cadastro
+        Tela de cadastro
       </BotoesAjuste>
       <ContentTabela
         style={{

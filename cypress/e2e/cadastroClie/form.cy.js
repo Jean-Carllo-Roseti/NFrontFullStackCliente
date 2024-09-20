@@ -91,5 +91,6 @@ describe('Teste  Formulário', () => {
 
   it('Teste button exibir tabela', () => {
     cy.get('.sc-dntaoT').contains('Exibir Tabela').click()
+    cy.get('table').should('be.visible')
   })
 })
