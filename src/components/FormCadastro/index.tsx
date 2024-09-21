@@ -104,6 +104,7 @@ const FormCadastro = () => {
             value={cliente.nome}
             onChange={onChange}
             required
+            data-testid="testeNome"
           />
           <label htmlFor="sobreNome">Sobre Nome</label>
           <input
@@ -113,6 +114,7 @@ const FormCadastro = () => {
             value={cliente.sobreNome}
             onChange={onChange}
             required
+            data-testid=" testeSobre"
           />
           <label htmlFor="email"> E-mail</label>
           <input
@@ -122,6 +124,7 @@ const FormCadastro = () => {
             value={cliente.email}
             onChange={onChange}
             required
+            data-testid="testeE-mail "
           />
           <label htmlFor="idade">Idade</label>
           <input
@@ -131,6 +134,7 @@ const FormCadastro = () => {
             value={cliente.idade}
             onChange={onChange}
             required
+            data-testid="testeIdade "
           />
           <label htmlFor="endereco">Endereço</label>
           <input
@@ -140,6 +144,7 @@ const FormCadastro = () => {
             value={cliente.endereco}
             onChange={onChange}
             required
+            data-testid="testeEnd "
           />
           <label htmlFor="cidade">Cidade</label>
           <input
@@ -149,6 +154,7 @@ const FormCadastro = () => {
             value={cliente.cidade}
             onChange={onChange}
             required
+            data-testid="testeCid "
           />
           <label htmlFor="estado">Estado</label>
           <input
@@ -158,6 +164,7 @@ const FormCadastro = () => {
             value={cliente.estado}
             onChange={onChange}
             required
+            data-testid="testeEst "
           />
           <ContentButton>
             <Botoes type="submit">Salvar</Botoes>
