@@ -2,6 +2,37 @@ import React, { useState } from 'react'
 import { Cliente } from '../../types/index'
 import { ContentForm, ContentButton } from '../FormCadastro/style'
 import { Botoes } from '../FormCadastro/style'
+import Select from 'react-select'
+
+const estados = [
+  { label: 'AC', value: 'AC ' },
+  { label: 'AL', value: 'AL' },
+  { label: 'AP', value: 'AP' },
+  { label: 'AM', value: 'AM' },
+  { label: 'BA', value: 'BA' },
+  { label: 'CE', value: 'CE' },
+  { label: 'DF', value: 'DF' },
+  { label: 'ES', value: 'ES' },
+  { label: 'GO', value: 'Go' },
+  { label: 'MA', value: 'MA' },
+  { label: 'MT', value: 'MT' },
+  { label: 'MS', value: 'MS' },
+  { label: 'MG', value: 'MG' },
+  { label: 'PA', value: 'PA' },
+  { label: 'PB', value: 'PB' },
+  { label: 'PR', value: 'PA' },
+  { label: 'PE', value: 'PE' },
+  { label: 'PI', value: 'PI' },
+  { label: 'RJ', value: 'RJ' },
+  { label: 'RN', value: 'RN' },
+  { label: 'RS', value: 'RS' },
+  { label: 'RO', value: 'RO' },
+  { label: 'RR', value: 'RR' },
+  { label: 'SC', value: 'SC' },
+  { label: 'SP', value: 'SP' },
+  { label: 'SE', value: 'SE' },
+  { label: 'TO', value: 'TO' }
+]
 
 const EditForm: React.FC<{
   cliente: Cliente
@@ -10,23 +41,50 @@ const EditForm: React.FC<{
 }> = ({ cliente, onSave, onCancel }) => {
   const [editorClient, setEditorCliente] = useState<Cliente>(cliente)
   const [mensagem, setMensagem] = useState<string | null>(null)
+  const [selectedState, setSelectedState] = useState<{
+    value: string
+    label: string
+  } | null>(null)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
 
-    // Se for o campo de idade, aplique a regex para permitir apenas números
     if (id === 'idade') {
-      const onlyNumbers = value.replace(/[^0-9]/g, '') // Permite apenas números
+      const onlyNumbers = value.replace(/[^0-9]/g, '')
+
+      // Definir limites para a idade
+      const minAge = 18 // Valor mínimo
+      const maxAge = 120 // Valor máximo
+
+      let age = Number(onlyNumbers)
+
+      // Aplicar os limites: se for menor que o mínimo ou maior que o máximo
+      if (age < minAge) age = minAge
+      if (age > maxAge) age = maxAge
+
       setEditorCliente((prevCliente) => ({
         ...prevCliente,
-        [id]: onlyNumbers ? Number(onlyNumbers) : 0 // Armazena a idade apenas com números
+        [id]: age || 0 // Definir a idade como 0 se o campo estiver vazio
       }))
     } else {
-      // Para os outros campos, basta atualizar o estado normalmente
       setEditorCliente((prevCliente) => ({
         ...prevCliente,
         [id]: value
       }))
+    }
+  }
+
+  const handleChange = (
+    selectedOption: { value: string; label: string } | null
+  ) => {
+    setSelectedState(selectedOption)
+    if (selectedOption) {
+      setEditorCliente((prevCliente) => ({
+        ...prevCliente,
+        estado: selectedOption.value
+      }))
+    } else {
+      setEditorCliente((prevCliente) => ({ ...prevCliente, estado: '' }))
     }
   }
 
@@ -46,12 +104,17 @@ const EditForm: React.FC<{
           {mensagem}
         </p>
       )}
-      <ContentForm style={{ paddingBottom: '18px' }}>
-        <form data-testid="formEdicao" onSubmit={handleSubmit}>
+      <ContentForm style={{ paddingBottom: '18px', marginTop: '-4px' }}>
+        <form
+          style={{ marginTop: '14px' }}
+          data-testid="formEdicao"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="nome">Nome</label>
           <input
             id="nome"
             type="text"
+            required
             value={editorClient.nome}
             onChange={onChange}
           />
@@ -59,6 +122,7 @@ const EditForm: React.FC<{
           <input
             id="sobreNome"
             type="text"
+            required
             value={editorClient.sobreNome}
             onChange={onChange}
           />
@@ -66,13 +130,16 @@ const EditForm: React.FC<{
           <input
             id="email"
             type="email"
+            required
             value={editorClient.email}
             onChange={onChange}
           />
           <label htmlFor="idade">Idade</label>
           <input
+            max={120}
             id="idade"
             type="text"
+            required
             value={editorClient.idade}
             onChange={onChange}
           />
@@ -80,6 +147,7 @@ const EditForm: React.FC<{
           <input
             id="endereco"
             type="text"
+            required
             value={editorClient.endereco}
             onChange={onChange}
           />
@@ -87,15 +155,35 @@ const EditForm: React.FC<{
           <input
             id="cidade"
             type="text"
+            required
             value={editorClient.cidade}
             onChange={onChange}
           />
           <label htmlFor="estado">Estado</label>
-          <input
+          <Select
+            className="campoSelect"
             id="estado"
-            type="text"
-            value={editorClient.estado}
-            onChange={onChange}
+            placeholder="Selecione o Estado"
+            value={selectedState}
+            onChange={handleChange}
+            options={estados}
+            required
+            data-testid="testeEst"
+            styles={{
+              menu: (base) => ({
+                ...base,
+                maxHeight: 200, // Defina a altura máxima do dropdown
+                overflowY: 'hidden' // Permite rolagem se necessário
+              }),
+              option: (base, state) => ({
+                ...base,
+                cursor: 'pointer', // Define o cursor como pointer em todas as opções
+                backgroundColor: state.isFocused ? '#f1b692' : '#fff', // Cor de fundo quando a opção é focada
+                '&:hover': {
+                  backgroundColor: '#f1b692' // Cor de fundo no hover
+                }
+              })
+            }}
           />
           <ContentButton>
             <Botoes type="submit">Salvar</Botoes>

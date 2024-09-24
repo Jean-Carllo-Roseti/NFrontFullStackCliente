@@ -5,6 +5,7 @@ export const ContentForm = styled.div`
   max-width: 1024px;
   width: 100%;
   margin-top: 60px;
+  overflow: hidden; /* Evita o scroll indesejado */
 
   h2 {
     text-align: center;
@@ -15,6 +16,7 @@ export const ContentForm = styled.div`
   form {
     background-color: #e74c3c;
     margin: 0 auto;
+    margin-bottom: 12px;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -29,12 +31,18 @@ export const ContentForm = styled.div`
     color: #2c3e50;
   }
 
-  input {
+  input,
+  .campoSelect {
     padding: 8px;
     width: 90%;
     margin: 0 auto;
     border-radius: 8px;
     border: none;
+  }
+
+  .campoSelect {
+    margin: 0 auto;
+    padding: 8px 0;
   }
 `
 export const ContentButton = styled.div`
