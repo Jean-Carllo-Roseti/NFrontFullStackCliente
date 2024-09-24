@@ -48,7 +48,7 @@ const TabelaConsulta: React.FC<TabelaConsultaProps> = ({ onBack }) => {
             onCancel={handleCancel}
           />
         ) : (
-          <table>
+          <table data-testid="tabelaCont">
             <thead>
               <tr>
                 <th>ID</th>
@@ -77,6 +77,7 @@ const TabelaConsulta: React.FC<TabelaConsultaProps> = ({ onBack }) => {
                     <TableButton
                       onClick={() => removeCliente(cliente.id)}
                       title="remover cadastro"
+                      data-testid="remover"
                       style={{
                         background: 'none',
                         border: 'none',
@@ -91,6 +92,7 @@ const TabelaConsulta: React.FC<TabelaConsultaProps> = ({ onBack }) => {
                     <button
                       onClick={() => handleEdit(cliente)}
                       title="alterar cadastro"
+                      data-testid="alterar"
                       style={{
                         background: 'none',
                         border: 'none',

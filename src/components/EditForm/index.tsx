@@ -47,7 +47,7 @@ const EditForm: React.FC<{
         </p>
       )}
       <ContentForm style={{ paddingBottom: '18px' }}>
-        <form onSubmit={handleSubmit}>
+        <form data-testid="formEdicao" onSubmit={handleSubmit}>
           <label htmlFor="nome">Nome</label>
           <input
             id="nome"

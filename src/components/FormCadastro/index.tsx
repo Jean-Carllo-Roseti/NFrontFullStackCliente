@@ -167,9 +167,12 @@ const FormCadastro = () => {
             data-testid="testeEst "
           />
           <ContentButton>
-            <Botoes type="submit">Salvar</Botoes>
+            <Botoes data-testid="salvar" type="submit">
+              Salvar
+            </Botoes>
             <Botoes
               type="button"
+              data-testid="limpar"
               onClick={() =>
                 setCliente({
                   id: 0,
@@ -188,6 +191,7 @@ const FormCadastro = () => {
           </ContentButton>
           <BotaoExibir
             className="exibir"
+            data-testid="exibir"
             type="button"
             onClick={handleToggeTabela}
           >
