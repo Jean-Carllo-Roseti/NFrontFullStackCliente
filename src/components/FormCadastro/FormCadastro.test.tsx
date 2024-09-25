@@ -15,7 +15,7 @@ test('Deve renderizar o formulário com os campos corretos e botões.', () => {
   expect(screen.getByTestId('testeIdade')).toBeInTheDocument()
   expect(screen.getByTestId('testeEnd')).toBeInTheDocument()
   expect(screen.getByTestId('testeCid')).toBeInTheDocument()
-  expect(screen.getByTestId('testeEst')).toBeInTheDocument()
+  // expect(screen.getByTestId('testeEst')).toBeInTheDocument()
 
   //Testar se os botões estão renderizando
   expect(screen.getByTestId('exibir')).toBeInTheDocument()

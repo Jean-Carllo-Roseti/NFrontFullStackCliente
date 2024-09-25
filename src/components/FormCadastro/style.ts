@@ -29,12 +29,17 @@ export const ContentForm = styled.div`
     color: #2c3e50;
   }
 
-  input {
+  input,
+  .campoSelect {
     padding: 8px;
     width: 90%;
     margin: 0 auto;
     border-radius: 8px;
     border: none;
+  }
+
+  .campoSelect {
+    padding: 8px 0;
   }
 `
 export const ContentButton = styled.div`
