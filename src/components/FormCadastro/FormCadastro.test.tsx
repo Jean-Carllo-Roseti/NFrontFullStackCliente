@@ -9,13 +9,14 @@ test('Deve renderizar o formulário com os campos corretos e botões.', () => {
   expect(screen.getByText(/Dados Pessoais/i)).toBeInTheDocument()
 
   // Testar se os campos do formulário estão presentes
+  expect(screen.getByTestId('formCastro')).toBeInTheDocument()
   expect(screen.getByTestId('testeNome')).toBeInTheDocument()
   expect(screen.getByTestId('testeSobre')).toBeInTheDocument()
   expect(screen.getByTestId('testeE-mail')).toBeInTheDocument()
   expect(screen.getByTestId('testeIdade')).toBeInTheDocument()
   expect(screen.getByTestId('testeEnd')).toBeInTheDocument()
   expect(screen.getByTestId('testeCid')).toBeInTheDocument()
-  // expect(screen.getByTestId('testeEst')).toBeInTheDocument()
+  expect(screen.getByTestId('testeEst')).toBeInTheDocument()
 
   //Testar se os botões estão renderizando
   expect(screen.getByTestId('exibir')).toBeInTheDocument()

@@ -27,7 +27,6 @@ describe('Tabela Consulta', () => {
       ],
       loading: false,
       error: null,
-      // removeCliente: mockRemoveCliente,
       editCliente: mockEditCliente
     })
   })
