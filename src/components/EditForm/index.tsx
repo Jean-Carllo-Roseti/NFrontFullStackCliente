@@ -95,8 +95,19 @@ const EditForm: React.FC<{
           {mensagem}
         </p>
       )}
-      <ContentForm style={{ paddingBottom: '18px' }}>
-        <form data-testid="formEdicao" onSubmit={handleSubmit}>
+      <ContentForm
+        style={{
+          paddingBottom: '18px',
+          marginBottom: '60px',
+          overflowY: 'hidden',
+          marginTop: '0'
+        }}
+      >
+        <form
+          style={{ marginTop: '12px' }}
+          data-testid="formEdicao"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="nome">Nome</label>
           <input
             id="nome"
@@ -124,6 +135,7 @@ const EditForm: React.FC<{
             type="text"
             value={editorClient.idade}
             onChange={onChange}
+            maxLength={2}
           />
           <label htmlFor="endereco">Endereço</label>
           <input
@@ -152,7 +164,7 @@ const EditForm: React.FC<{
             styles={{
               menu: (base) => ({
                 ...base,
-                maxHeight: 200, // Defina a altura máxima do dropdown
+                maxHeight: 300, // Defina a altura máxima do dropdown
                 overflowY: 'hidden' // Permite rolagem se necessário
               }),
               option: (base, state) => ({

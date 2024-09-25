@@ -182,6 +182,7 @@ const FormCadastro = () => {
             placeholder="Idade"
             value={cliente.idade}
             onChange={onChange}
+            maxLength={2}
             required
             data-testid="testeIdade "
           />
