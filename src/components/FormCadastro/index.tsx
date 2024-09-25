@@ -38,13 +38,13 @@ const estados = [
 
 const FormCadastro = () => {
   const { addCliente } = useClientes()
-  const [exibirTabela, setExibirTabela] = useState(false)
-  const [mensagem, setMensagem] = useState<string | null>(null)
-  const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
   const [selectedState, setSelectedState] = useState<{
     value: string
     label: string
   } | null>(null)
+  const [exibirTabela, setExibirTabela] = useState(false)
+  const [mensagem, setMensagem] = useState<string | null>(null)
+  const [editandoCliente, setEditandoCliente] = useState<Cliente | null>(null)
   const [cliente, setCliente] = useState<Cliente>({
     id: 0,
     nome: '',
@@ -96,41 +96,18 @@ const FormCadastro = () => {
     setTimeout(() => setMensagem(null), 3000)
   }
 
-  const handleChange = (
-    selectedOption: { value: string; label: string } | null
-  ) => {
-    setSelectedState(selectedOption)
-    if (selectedOption) {
-      setCliente((prevCliente) => ({
-        ...prevCliente,
-        estado: selectedOption.value
-      }))
-    } else {
-      setCliente((prevCliente) => ({ ...prevCliente, estado: '' }))
-    }
-  }
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
 
+    // Se for o campo de idade, aplique a regex para permitir apenas números
     if (id === 'idade') {
-      const onlyNumbers = value.replace(/[^0-9]/g, '')
-
-      // Definir limites para a idade
-      const minAge = 18 // Valor mínimo
-      const maxAge = 120 // Valor máximo
-
-      let age = Number(onlyNumbers)
-
-      // Aplicar os limites: se for menor que o mínimo ou maior que o máximo
-      if (age < minAge) age = minAge
-      if (age > maxAge) age = maxAge
-
+      const onlyNumbers = value.replace(/[^0-9]/g, '') // Permite apenas números
       setCliente((prevCliente) => ({
         ...prevCliente,
-        [id]: age || 0 // Definir a idade como 0 se o campo estiver vazio
+        [id]: onlyNumbers ? Number(onlyNumbers) : 0 // Armazena a idade apenas com números
       }))
     } else {
+      // Para os outros campos, basta atualizar o estado normalmente
       setCliente((prevCliente) => ({
         ...prevCliente,
         [id]: value
@@ -199,13 +176,13 @@ const FormCadastro = () => {
           />
           <label htmlFor="idade">Idade</label>
           <input
+            maxLength={2}
             data-testid="testeIdade"
             id="idade"
             type="text"
             placeholder="Idade"
             value={cliente.idade}
             onChange={onChange}
-            maxLength={2}
             required
           />
           <label htmlFor="endereco">Endereço</label>
@@ -241,11 +218,7 @@ const FormCadastro = () => {
             styles={{
               menu: (base) => ({
                 ...base,
-<<<<<<< HEAD
-                maxHeight: 150, // Defina a altura máxima do dropdown
-=======
                 maxHeight: 200, // Defina a altura máxima do dropdown
->>>>>>> 1dacb6c9918e560488429d8cf4d555211c822618
                 overflowY: 'hidden' // Permite rolagem se necessário
               }),
               option: (base, state) => ({

@@ -49,24 +49,15 @@ const EditForm: React.FC<{
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
 
+    // Se for o campo de idade, aplique a regex para permitir apenas números
     if (id === 'idade') {
-      const onlyNumbers = value.replace(/[^0-9]/g, '')
-
-      // Definir limites para a idade
-      const minAge = 18 // Valor mínimo
-      const maxAge = 120 // Valor máximo
-
-      let age = Number(onlyNumbers)
-
-      // Aplicar os limites: se for menor que o mínimo ou maior que o máximo
-      if (age < minAge) age = minAge
-      if (age > maxAge) age = maxAge
-
+      const onlyNumbers = value.replace(/[^0-9]/g, '') // Permite apenas números
       setEditorCliente((prevCliente) => ({
         ...prevCliente,
-        [id]: age || 0 // Definir a idade como 0 se o campo estiver vazio
+        [id]: onlyNumbers ? Number(onlyNumbers) : 0 // Armazena a idade apenas com números
       }))
     } else {
+      // Para os outros campos, basta atualizar o estado normalmente
       setEditorCliente((prevCliente) => ({
         ...prevCliente,
         [id]: value
@@ -104,8 +95,12 @@ const EditForm: React.FC<{
           {mensagem}
         </p>
       )}
-      <ContentForm style={{ paddingBottom: '18px' }}>
-        <form data-testid="formEdicao" onSubmit={handleSubmit}>
+      <ContentForm style={{ paddingBottom: '18px', marginTop: '-4px' }}>
+        <form
+          style={{ marginTop: '14px' }}
+          data-testid="formEdicao"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="nome">Nome</label>
           <input
             id="nome"
@@ -132,13 +127,12 @@ const EditForm: React.FC<{
           />
           <label htmlFor="idade">Idade</label>
           <input
-            max={120}
+            maxLength={2}
             id="idade"
             type="text"
             required
             value={editorClient.idade}
             onChange={onChange}
-            maxLength={2}
           />
           <label htmlFor="endereco">Endereço</label>
           <input
@@ -160,9 +154,27 @@ const EditForm: React.FC<{
           <Select
             className="campoSelect"
             id="estado"
-            type="text"
-            value={editorClient.estado}
-            onChange={onChange}
+            placeholder="Selecione o Estado"
+            value={selectedState}
+            onChange={handleChange}
+            options={estados}
+            required
+            data-testid="testeEst"
+            styles={{
+              menu: (base) => ({
+                ...base,
+                maxHeight: 200, // Defina a altura máxima do dropdown
+                overflowY: 'hidden' // Permite rolagem se necessário
+              }),
+              option: (base, state) => ({
+                ...base,
+                cursor: 'pointer', // Define o cursor como pointer em todas as opções
+                backgroundColor: state.isFocused ? '#f1b692' : '#fff', // Cor de fundo quando a opção é focada
+                '&:hover': {
+                  backgroundColor: '#f1b692' // Cor de fundo no hover
+                }
+              })
+            }}
           />
           <ContentButton>
             <Botoes type="submit">Salvar</Botoes>

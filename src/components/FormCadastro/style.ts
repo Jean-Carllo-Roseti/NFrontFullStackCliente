@@ -16,7 +16,7 @@ export const ContentForm = styled.div`
   form {
     background-color: #e74c3c;
     margin: 0 auto;
-    margin-bottom: 12px;
+    margin-bottom: 60px;
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -41,10 +41,6 @@ export const ContentForm = styled.div`
   }
 
   .campoSelect {
-<<<<<<< HEAD
-=======
-    margin: 0 auto;
->>>>>>> 1dacb6c9918e560488429d8cf4d555211c822618
     padding: 8px 0;
   }
 `
