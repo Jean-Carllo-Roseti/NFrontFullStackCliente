@@ -7,6 +7,10 @@ export const ContentForm = styled.div`
   margin-top: 60px;
   overflow: hidden; /* Evita o scroll indesejado */
 
+  @media (max-width: 480px) {
+    width: 90%;
+  }
+
   h2 {
     text-align: center;
     margin-bottom: 18px;
