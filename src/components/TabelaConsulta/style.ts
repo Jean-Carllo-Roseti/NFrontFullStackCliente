@@ -9,6 +9,10 @@ export const ContentTabela = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
+
+    // @media (max-width: 760px) {
+    //   width: 70%;
+    // }
   }
 
   th,

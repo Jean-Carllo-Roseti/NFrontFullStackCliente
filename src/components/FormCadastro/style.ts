@@ -7,10 +7,6 @@ export const ContentForm = styled.div`
   margin-top: 60px;
   overflow: hidden; /* Evita o scroll indesejado */
 
-  @media (max-width: 480px) {
-    width: 90%;
-  }
-
   h2 {
     text-align: center;
     margin-bottom: 18px;
@@ -28,6 +24,10 @@ export const ContentForm = styled.div`
     border: none; /* Remove a borda */
     outline: 10px solid #c0392b; /* Use o outline para criar a borda */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 760px) {
+      width: 90%;
+    }
   }
 
   label {
