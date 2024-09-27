@@ -9,10 +9,6 @@ export const ContentTabela = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
-
-    // @media (max-width: 760px) {
-    //   width: 70%;
-    // }
   }
 
   th,
@@ -20,6 +16,7 @@ export const ContentTabela = styled.div`
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    font-size: 14px;
   }
 
   th {
@@ -33,6 +30,29 @@ export const ContentTabela = styled.div`
   tr:hover {
     border: 2px solid #000;
   }
+
+  /* Responsividade */
+
+  @media (max-width: 760px) {
+    table {
+      width: 100%; /* Mantém a tabela dentro da tela */
+    }
+
+    th,
+    td {
+      font-size: 12px; /* Diminui o tamanho da fonte */
+      padding: 6px;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5),
+    th:nth-child(6),
+    td:nth-child(6),
+    th:nth-child(7),
+    td:nth-child(7) {
+      display: none;
+    }
+  }
 `
 export const TableButton = styled.button`
   padding: 2px;
@@ -40,11 +60,12 @@ export const TableButton = styled.button`
   cursor: pointer;
   background-color: red;
 `
+
 export const BotoesAjuste = styled(Botoes)`
   margin-left: 20px;
   width: 20%;
 
-  &: hover {
+  &:hover {
     background-color: #e74c3c;
   }
 `
